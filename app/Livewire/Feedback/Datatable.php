@@ -3,6 +3,7 @@
 namespace App\Livewire\Feedback;
 
 use App\Models\Feedback;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -10,7 +11,10 @@ class Datatable extends Component
 {
     use WithPagination;
 
+    #[Url]
     public $perPage = 10;
+
+    #[Url]
     public $search = '';
     public $sortBy = 'created_at';
     public $sortDir = 'desc';

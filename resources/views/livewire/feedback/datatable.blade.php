@@ -99,7 +99,7 @@
                 </th>
             </tr>
             @foreach ($feedbacks as $feedback)
-                <tr class="bg-white dark:bg-gray-700 dark:text-white">
+                <tr class="bg-white dark:bg-gray-700 dark:text-white" wire:key="{{ $feedback->id }}">
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white">{{ $feedback->name }}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white">{{ $feedback->title }}
