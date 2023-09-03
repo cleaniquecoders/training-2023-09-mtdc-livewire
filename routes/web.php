@@ -1,6 +1,8 @@
 <?php
 
 use App\Livewire\Counter;
+use App\Livewire\Feedback\Datatable as FeedbackDatatable;
+use App\Livewire\Feedback\Form as FeedbackForm;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,3 +31,6 @@ Route::middleware([
 });
 
 Route::get('/counter', Counter::class);
+Route::get('/feedbacks/form', FeedbackForm::class);
+Route::get('/feedbacks', FeedbackDatatable::class);
+
