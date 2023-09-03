@@ -17,22 +17,22 @@
 
             <div class="my-2">
                 <x-label for="name" value="{{ __('Name') }}" />
-                <x-input class="block mt-1 w-full" type="text" wire:model="state.name" required />
+                <x-input class="block mt-1 w-full" type="text" wire:model="state.name" />
             </div>
 
             <div class="my-2">
                 <x-label for="email" value="{{ __('E-mail') }}" />
-                <x-input class="block mt-1 w-full" type="email" wire:model="state.email" required />
+                <x-input class="block mt-1 w-full" type="email" wire:model="state.email" />
             </div>
 
             <div class="my-2">
                 <x-label for="title" value="{{ __('Title') }}" />
-                <x-input class="block mt-1 w-full" type="text" wire:model="state.title" required />
+                <x-input class="block mt-1 w-full" type="text" wire:model="state.title" />
             </div>
 
             <div class="my-2">
                 <x-label for="content" value="{{ __('Feedback') }}" />
-                <x-input class="block mt-1 w-full" type="text" wire:model="state.content" required />
+                <x-input class="block mt-1 w-full" type="text" wire:model="state.content" />
             </div>
 
             <div class="flex items-center justify-end mt-4">
