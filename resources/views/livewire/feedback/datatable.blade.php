@@ -1,9 +1,12 @@
 <div>
-
+    {{-- Add filters --}}
+    {{-- Add mark as read --}}
+    {{-- Add multiple select --}}
+    {{-- Add row click --}}
 
     <div class="flex justify-between my-2 items-center">
         <x-input type="text" placeholder="Search" wire:model.live.debounce.300ms="search" />
-        
+
     </div>
 
     <div class="shadow overflow-y-scroll border-b border-gray-200 dark:border-gray-700 sm:rounded-lg my-4">
