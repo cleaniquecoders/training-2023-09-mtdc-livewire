@@ -30,6 +30,11 @@ class Datatable extends Component
         Feedback::where('id', $id)->delete();
     }
 
+    public function updatedSearch()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
         return view('livewire.feedback.datatable', [
