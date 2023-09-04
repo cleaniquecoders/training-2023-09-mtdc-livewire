@@ -27,6 +27,7 @@ class UserDatatable extends Component
         $this->resetPage();
     }
 
+    // @todo when updated / updating page, it shouldn't select the checkboxes that not yet selected.
     public function updatedPage()
     {
         // dd($this->selectedRows);
@@ -34,6 +35,7 @@ class UserDatatable extends Component
 
     public function updatedSelectedRows()
     {
+        // make sure it's integer or actually we can omit this - in case we are using uuid over id.
         $this->selectedRows = collect($this->selectedRows)->map(fn($value) => (int) $value)->toArray();
     }
 
