@@ -13,6 +13,11 @@ class UserDatatable extends Component
     public $perPage = 10;
     public $search = '';
 
+    public function updatedSearch()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
         return view('livewire.user-datatable', [
