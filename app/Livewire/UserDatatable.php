@@ -13,9 +13,23 @@ class UserDatatable extends Component
     public $perPage = 10;
     public $search = '';
 
+    public $sortBy = 'created_at';
+    public $sortDir = 'desc';
+
     public function updatedSearch()
     {
         $this->resetPage();
+    }
+
+    public function setSort($field)
+    {
+        if($this->sortBy == $field) {
+            $this->sortDir = $this->sortDir == 'desc' ? 'asc' : 'desc';
+            return;
+        }
+
+        $this->sortBy = $field;
+        $this->sortDir = 'desc';
     }
 
     public function render()
@@ -23,6 +37,7 @@ class UserDatatable extends Component
         return view('livewire.user-datatable', [
             'users' => User::query()
                 ->search($this->search)
+                ->orderBy($this->sortBy, $this->sortDir)
                 ->paginate($this->perPage),
         ]);
     }
