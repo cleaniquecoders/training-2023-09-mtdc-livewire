@@ -16,9 +16,34 @@ class UserDatatable extends Component
     public $sortBy = 'created_at';
     public $sortDir = 'desc';
 
+    public $isVerified = '';
+
+    public $selectAll = false;
+    public $selectAllCurrentPage = false;
+    public $selectedRows = [];
+
     public function updatedSearch()
     {
         $this->resetPage();
+    }
+
+    public function updatedPage()
+    {
+        // dd($this->selectedRows);
+    }
+
+    public function updatedSelectedRows()
+    {
+        $this->selectedRows = collect($this->selectedRows)->map(fn($value) => (int) $value)->toArray();
+    }
+
+    public function updatedSelectAllCurrentPage()
+    {
+        $this->selectedRows =
+            ! $this->selectAllCurrentPage ? []
+            : collect(User::query()
+                ->paginate($this->perPage, ['*'], 'page', $this->getPage())
+                ->items())->pluck('id')->toArray();
     }
 
     public function setSort($field)
@@ -38,6 +63,8 @@ class UserDatatable extends Component
             'users' => User::query()
                 ->search($this->search)
                 ->orderBy($this->sortBy, $this->sortDir)
+                ->when($this->isVerified === "1", fn($query) => $query->whereNotNull('email_verified_at'))
+                ->when($this->isVerified === "2", fn($query) => $query->whereNull('email_verified_at'))
                 ->paginate($this->perPage),
         ]);
     }
