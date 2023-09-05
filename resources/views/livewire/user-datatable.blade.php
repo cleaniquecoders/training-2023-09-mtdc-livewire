@@ -4,13 +4,23 @@
 
         <div class="flex justify-end">
             @if ($selectedRows)
-                <select placeholder="User Type"
-                    wire:model.live="markAction"
-                    class="mr-4 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-gray-500 dark:focus:border-gray-600 focus:ring-gray-500 dark:focus:ring-gray-600 rounded-md shadow-sm">
-                    <option disabled selected>Please select action</option>
-                    <option value="0">Mark as Verfied</option>
-                    <option value="1">Mark as Non-Verified</option>
-                </select>
+                <x-button
+                    onclick="confirm('Are you sure want to delete selected users? ?') || event.stopImmediatePropagation()"
+                    wire:click="removeSelectedUsers()" class="bg-red-700 mx-2">
+                    Delete Selected Users
+                </x-button>
+                <x-button
+                    onclick="confirm('Are you sure want to verify for selected users? ?') || event.stopImmediatePropagation()"
+                    wire:click="verifySelectedUsers()"
+                    class="mx-2">
+                    Verify Selected Users
+                </x-button>
+                <x-secondary-button
+                    onclick="confirm('Are you sure want to set to non-verify for selected users? ?') || event.stopImmediatePropagation()"
+                    wire:click="unVerifySelectedUsers()"
+                    class="mx-2">
+                    Un-Verify Selected Users
+                </x-secondary-button>
             @endif
 
             <select wire:model.live="isVerified" placeholder="User Type"
@@ -66,7 +76,9 @@
                             <x-button class="mx-2">
                                 Update
                             </x-button>
-                            <x-button class="bg-red-700 mx-2">
+                            <x-button
+                                onclick="confirm('Are you sure want to delete {{ $user->name }} ?') || event.stopImmediatePropagation()"
+                                wire:click="removeUser({{ $user->id }})" class="bg-red-700 mx-2">
                                 Delete
                             </x-button>
                         </td>

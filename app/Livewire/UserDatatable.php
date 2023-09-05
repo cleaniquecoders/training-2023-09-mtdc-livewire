@@ -36,19 +36,48 @@ class UserDatatable extends Component
         $this->resetPage();
     }
 
-    public function updatedMarkAction()
+    public function removeUser($id)
     {
-        if($this->markAction == '' || count($this->selectedRows) == 0) {
+        User::whereId($id)->delete();
+
+        $this->reset();
+    }
+
+    public function removeSelectedUsers()
+    {
+        if(count($this->selectedRows) == 0) {
             return;
         }
 
-        $query = User::query()->whereIn('id', $this->selectedRows);
+        User::whereIn('id', $this->selectedRows)->delete();
 
-        if($this->markAction === "0") {
-            $query->update(['email_verified_at' => now()]);
-        } else {
-            $query->update(['email_verified_at' => null]);
+        $this->reset();
+    }
+
+    public function verifySelectedUsers()
+    {
+        if(count($this->selectedRows) == 0) {
+            return;
         }
+
+        User::whereIn('id', $this->selectedRows)->update([
+            'email_verified_at' => now(),
+        ]);
+
+        $this->reset();
+    }
+
+    public function unVerifySelectedUsers()
+    {
+        if(count($this->selectedRows) == 0) {
+            return;
+        }
+
+        User::whereIn('id', $this->selectedRows)->update([
+            'email_verified_at' => null,
+        ]);
+
+        $this->reset();
     }
 
     // @todo when updated / updating page, it shouldn't select the checkboxes that not yet selected.
