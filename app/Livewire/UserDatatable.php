@@ -10,28 +10,51 @@ class UserDatatable extends Component
 {
     use WithPagination;
 
-    public $perPage = 10;
-    public $search = '';
+    public int $perPage = 10;
+    public string $search = '';
 
-    public $sortBy = 'created_at';
-    public $sortDir = 'desc';
+    public string $sortBy = 'created_at';
+    public string $sortDir = 'desc';
 
-    public $isVerified = '';
+    public string $isVerified = '';
+    public string $markAction = '';
 
-    public $selectAll = false;
-    public $selectAllCurrentPage = false;
-    public $selectedRows = [];
-    public $selectedCheckboxes = [];
+    public bool $selectAllCurrentPage = false;
+    public array $selectedRows = [];
+
+    /** wip */
+    public bool $selectAll = false;
+    public array $selectedCheckboxes = [];
 
     public function updatedSearch()
     {
         $this->resetPage();
     }
 
+    public function updatedIsVerified()
+    {
+        $this->resetPage();
+    }
+
+    public function updatedMarkAction()
+    {
+        if($this->markAction == '' || count($this->selectedRows) == 0) {
+            return;
+        }
+
+        $query = User::query()->whereIn('id', $this->selectedRows);
+
+        if($this->markAction === "0") {
+            $query->update(['email_verified_at' => now()]);
+        } else {
+            $query->update(['email_verified_at' => null]);
+        }
+    }
+
     // @todo when updated / updating page, it shouldn't select the checkboxes that not yet selected.
     public function updatingPage()
     {
-        // dd($this->selectedRows);
+        // check if selected records exists in selected rows
     }
 
     public function updatedSelectedRows()
@@ -48,6 +71,8 @@ class UserDatatable extends Component
                 ->paginate($this->perPage, ['*'], 'page', $this->getPage())
                 ->items())->pluck('id')->toArray();
     }
+
+
 
     public function setSort($field)
     {
