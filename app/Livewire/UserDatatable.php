@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\User;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -10,12 +11,19 @@ class UserDatatable extends Component
 {
     use WithPagination;
 
+    #[Url]
     public int $perPage = 10;
+
+    #[Url]
     public string $search = '';
 
+    #[Url]
     public string $sortBy = 'created_at';
+
+    #[Url]
     public string $sortDir = 'desc';
 
+    #[Url]
     public string $isVerified = '';
     public string $markAction = '';
 
