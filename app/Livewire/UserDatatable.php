@@ -21,6 +21,7 @@ class UserDatatable extends Component
     public $selectAll = false;
     public $selectAllCurrentPage = false;
     public $selectedRows = [];
+    public $selectedCheckboxes = [];
 
     public function updatedSearch()
     {
@@ -28,7 +29,7 @@ class UserDatatable extends Component
     }
 
     // @todo when updated / updating page, it shouldn't select the checkboxes that not yet selected.
-    public function updatedPage()
+    public function updatingPage()
     {
         // dd($this->selectedRows);
     }
