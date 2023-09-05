@@ -33,7 +33,7 @@
 
     <div class="flex w-full justify-end my-2">
 
-        <x-input class="block mt-1 w-full" type="text" wire:model="todo" />
+        <x-input class="block mt-1 w-full" type="text" wire:model="todo" wire:keydown.enter="add" />
 
         <div class="mx-2">
             <x-button class=" block py-3 mt-1" wire:click="add">
