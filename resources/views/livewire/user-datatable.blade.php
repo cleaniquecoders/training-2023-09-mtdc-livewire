@@ -1,6 +1,11 @@
 <div>
+
     <div class="my-4 flex justify-between">
-        <x-input class="block mt-1" placeholder="Search Keyword" type="text" wire:model.live="search" />
+
+        <div class="flex items-center">
+            <x-input class="block mt-1" placeholder="Search Keyword" type="text" wire:model.live.debounce.500ms="search" />
+            <span wire:loading wire:target="search" class="mx-2">Searching...</span>
+        </div>
 
         <div class="flex justify-end">
             @if ($selectedRows)
@@ -11,14 +16,12 @@
                 </x-button>
                 <x-button
                     onclick="confirm('Are you sure want to verify for selected users? ?') || event.stopImmediatePropagation()"
-                    wire:click="verifySelectedUsers()"
-                    class="mx-2">
+                    wire:click="verifySelectedUsers()" class="mx-2">
                     Verify Selected Users
                 </x-button>
                 <x-secondary-button
                     onclick="confirm('Are you sure want to set to non-verify for selected users? ?') || event.stopImmediatePropagation()"
-                    wire:click="unVerifySelectedUsers()"
-                    class="mx-2">
+                    wire:click="unVerifySelectedUsers()" class="mx-2">
                     Un-Verify Selected Users
                 </x-secondary-button>
             @endif
@@ -55,7 +58,13 @@
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
-
+                <tr>
+                    <td>
+                        <p class="text-center italic my-4 py-4 text-sm w-full" wire:loading>
+                            Populating data...
+                        </p>
+                    </td>
+                </tr>
                 @foreach ($users as $user)
                     <tr>
                         {{-- need to handle..if the id belongs to current, on select the item --}}
