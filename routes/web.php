@@ -3,7 +3,7 @@
 use App\Livewire\Counter;
 use App\Livewire\Feedback\Datatable as FeedbackDatatable;
 use App\Livewire\Feedback\Form as FeedbackForm;
-use App\Livewire\Input;
+use App\Livewire\UserForm;
 use App\Livewire\Support\Form as SupportForm;
 use App\Livewire\UserDatatable;
 use Illuminate\Support\Facades\Route;
@@ -40,4 +40,4 @@ Route::get('/feedbacks', FeedbackDatatable::class);
 Route::get('/supports/form', SupportForm::class);
 
 Route::get('/users', UserDatatable::class);
-Route::get('inputs', Input::class);
+Route::get('/users/form', UserForm::class);
