@@ -14,6 +14,9 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
+
+    @stack('styles')
 
     <title>{{ $title ?? 'Page Title' }}</title>
 </head>
@@ -27,6 +30,10 @@
             </div>
         </div>
     </div>
+
+
+
+    @stack('scripts')
 
 </body>
 

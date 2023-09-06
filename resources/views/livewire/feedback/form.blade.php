@@ -7,11 +7,33 @@
 
         <x-validation-errors class="mb-4" />
 
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
-                {{ session('status') }}
-            </div>
-        @endif
+        {{-- @if (session('status')) --}}
+        {{-- <div x-data="{ message : '' }"
+                x-on:status="{ message : $event.details.message }"
+                class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
+                <span x-text="message"></span>
+            </div> --}}
+        {{-- @endif --}}
+
+        @push('styles')
+            {{-- <link href="{{ url('css/toastr.css') }}" rel="stylesheet" /> --}}
+        @endpush
+
+        @push('scripts')
+            {{-- <script src="{{ url('js/toastr.js') }}"></script> --}}
+            <script>
+                document.addEventListener('livewire:initialized', () => {
+                    @this.on('status', (event) => {
+                        alert(event.message);
+                        // console.log(event)
+                        // new Toast({
+                        //     message: event.message,
+                        //     type: event.type
+                        // });
+                    });
+                });
+            </script>
+        @endpush
 
         <form wire:submit="save">
 

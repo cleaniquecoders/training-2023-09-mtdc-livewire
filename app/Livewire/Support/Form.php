@@ -39,9 +39,9 @@ class Form extends Component
 
         Support::create($this->state);
 
-        session()->flash('status', 'You support request has been submitted.');
+        $this->dispatch('status', message: 'You support request has been submitted.');
 
-        $this->redirect('/supports/form');
+        $this->reset();
     }
     public function render()
     {

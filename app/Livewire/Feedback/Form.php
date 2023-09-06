@@ -32,9 +32,9 @@ class Form extends Component
 
         Feedback::create($this->state);
 
-        session()->flash('status', 'Feedback successfully submitted.');
+        $this->dispatch('status', message: 'Feedback successfully submitted.', type: 'success');
 
-        return $this->redirect('/feedbacks/form');
+        $this->reset();
     }
 
     public function render()
