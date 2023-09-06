@@ -3,6 +3,127 @@
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
 
+                <h1 class="text-3xl mb-4">Select2 - multiple select</h1>
+
+                <!--
+    Notice: We have to use jQuery 3.5.1 instead of 3.6.0 because select2's
+    input field won't autofocus on open in that version for this reason:
+    https://github.com/select2/select2/issues/5993
+ -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+                    integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+                    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+                <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+                <div x-data="{
+                    multiple: true,
+                    value: ['1', '2'],
+                    options: [
+                        { value: 1, label: 'Caleb Porzio' },
+                        { value: 2, label: 'Jason Beggs' },
+                        { value: 3, label: 'Tweedle Dee' },
+                        { value: 4, label: 'Tweedle Dum' },
+                    ],
+                    init() {
+                        let bootSelect2 = () => {
+                            let selections = this.multiple ? this.value : [this.value]
+
+                            $(this.$refs.select).select2({
+                                multiple: this.multiple,
+                                data: this.options.map(i => ({
+                                    id: i.value,
+                                    text: i.label,
+                                    selected: selections.map(i => String(i)).includes(String(i.value)),
+                                })),
+                            })
+                        }
+
+                        let refreshSelect2 = () => {
+                            $(this.$refs.select).select2('destroy')
+                            this.$refs.select.innerHTML = ''
+                            bootSelect2()
+                        }
+
+                        bootSelect2()
+
+                        $(this.$refs.select).on('change', () => {
+                            let currentSelection = $(this.$refs.select).select2('data')
+
+                            this.value = this.multiple ?
+                                currentSelection.map(i => i.id) :
+                                currentSelection[0].id
+                        })
+
+                        this.$watch('value', () => refreshSelect2())
+                        this.$watch('options', () => refreshSelect2())
+                    },
+                }" class="max-w-sm w-full">
+                    <select x-ref="select" class="w-full"></select>
+                </div>
+                <hr class="my-4">
+
+                <h1 class="text-3xl mb-4">Select2 - single select</h1>
+
+                <!--
+    Notice: We have to use jQuery 3.5.1 instead of 3.6.0 because select2's
+    input field won't autofocus on open in that version for this reason:
+    https://github.com/select2/select2/issues/5993
+ -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+                    integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+                    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+                    rel="stylesheet" />
+                <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+                <div x-data="{
+                    multiple: false,
+                    value: '1',
+                    options: [
+                        { value: 1, label: 'Caleb Porzio' },
+                        { value: 2, label: 'Jason Beggs' },
+                        { value: 3, label: 'Tweedle Dee' },
+                        { value: 4, label: 'Tweedle Dum' },
+                    ],
+                    init() {
+                        let bootSelect2 = () => {
+                            let selections = this.multiple ? this.value : [this.value]
+
+                            $(this.$refs.select).select2({
+                                multiple: this.multiple,
+                                data: this.options.map(i => ({
+                                    id: i.value,
+                                    text: i.label,
+                                    selected: selections.map(i => String(i)).includes(String(i.value)),
+                                })),
+                            })
+                        }
+
+                        let refreshSelect2 = () => {
+                            $(this.$refs.select).select2('destroy')
+                            this.$refs.select.innerHTML = ''
+                            bootSelect2()
+                        }
+
+                        bootSelect2()
+
+                        $(this.$refs.select).on('change', () => {
+                            let currentSelection = $(this.$refs.select).select2('data')
+
+                            this.value = this.multiple ?
+                                currentSelection.map(i => i.id) :
+                                currentSelection[0].id
+                        })
+
+                        this.$watch('value', () => refreshSelect2())
+                        this.$watch('options', () => refreshSelect2())
+                    },
+                }" class="max-w-sm w-full">
+                    <select x-ref="select" class="w-full"></select>
+                </div>
+                <hr class="my-4">
+
                 <h1 class="text-3xl mb-4">Tab</h1>
 
                 <div>
