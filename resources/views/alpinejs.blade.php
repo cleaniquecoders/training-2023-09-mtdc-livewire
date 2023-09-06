@@ -3,6 +3,28 @@
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
 
+                <h1 class="text-3xl mb-4">Quill</h1>
+
+                <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+                <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+                <div x-data="{
+                    value: '',
+                    init() {
+                        let quill = new Quill(this.$refs.quill, { theme: 'snow' })
+
+                        quill.root.innerHTML = this.value
+
+                        quill.on('text-change', () => {
+                            this.value = quill.root.innerHTML
+                        })
+                    },
+                }" class="max-w-2xl w-full bg-white">
+                    <div x-ref="quill"></div>
+                </div>
+
+                <hr class="my-4">
+
                 <h1 class="text-3xl mb-4">Select2 - multiple select</h1>
 
                 <!--
@@ -13,7 +35,8 @@
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
                     integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
                     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-                <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+                <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+                    rel="stylesheet" />
                 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
                 <div x-data="{
