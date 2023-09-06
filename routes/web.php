@@ -3,6 +3,7 @@
 use App\Livewire\Counter;
 use App\Livewire\Feedback\Datatable as FeedbackDatatable;
 use App\Livewire\Feedback\Form as FeedbackForm;
+use App\Livewire\Modal;
 use App\Livewire\UserForm;
 use App\Livewire\Support\Form as SupportForm;
 use App\Livewire\Todo;
@@ -43,5 +44,7 @@ Route::get('/supports/form', SupportForm::class);
 Route::get('/users', UserDatatable::class);
 Route::get('/users/form', UserForm::class);
 Route::get('/todo', Todo::class);
+
+Route::get('/modal', Modal::class);
 
 Route::view('/alpinejs', 'alpinejs');
