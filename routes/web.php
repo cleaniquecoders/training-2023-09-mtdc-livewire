@@ -7,6 +7,7 @@ use App\Livewire\Modal;
 use App\Livewire\UserForm;
 use App\Livewire\Support\Form as SupportForm;
 use App\Livewire\Todo;
+use App\Livewire\Upload;
 use App\Livewire\UserDatatable;
 use Illuminate\Support\Facades\Route;
 
@@ -48,3 +49,5 @@ Route::get('/todo', Todo::class);
 Route::get('/modal', Modal::class);
 
 Route::view('/alpinejs', 'alpinejs');
+
+Route::get('/upload', Upload::class);
