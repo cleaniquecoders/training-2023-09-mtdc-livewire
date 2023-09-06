@@ -43,3 +43,5 @@ Route::get('/supports/form', SupportForm::class);
 Route::get('/users', UserDatatable::class);
 Route::get('/users/form', UserForm::class);
 Route::get('/todo', Todo::class);
+
+Route::view('/alpinejs', 'alpinejs');
